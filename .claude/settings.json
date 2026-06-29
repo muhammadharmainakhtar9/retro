@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(chromium-cli --help)",
+      "Bash(timeout 60 bash -c 'until curl -sf http://localhost:3000 >/dev/null; do sleep 1; done')",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(npx playwright *)",
+      "Bash(node verify.js)",
+      "Bash(node verify-replay.js)",
+      "Bash(rm -f \"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/1648bd1b-fae5-464d-953a-9c7258ddcfcb/scratchpad\"/screenshot-*.png \"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/1648bd1b-fae5-464d-953a-9c7258ddcfcb/scratchpad\"/replay-*.png *)",
+      "Bash(curl -sf http://localhost:3000)",
+      "Bash(node verify-home.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000 --max-time 10)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(npx --yes playwright install chromium --with-deps)",
+      "Bash(pkill -f \"playwright install\")",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Microsoft/Edge/Application/**)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/current.png\" --window-size=1280,720 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/current2.png\" --window-size=1280,720 \"http://localhost:3000\")",
+      "Bash(node -e ' *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s -o /dev/null -w \"port 3000: %{http_code}\\\\n\" http://localhost:3000 --max-time 5)",
+      "Bash(curl -s -o /dev/null -w \"port 3001: %{http_code}\\\\n\" http://localhost:3001 --max-time 5)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/gridscan.png\" --window-size=1280,720 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/gridscan2.png\" --window-size=1280,720 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/bars_back.png\" --window-size=1280,720 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/bars_tall.png\" --window-size=1440,900 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/align_check.png\" --window-size=1292,941 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/edge_pinned.png\" --window-size=1292,941 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/bars_align_check.png\" --window-size=830,1080 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/bars_fixed.png\" --window-size=830,1080 \"http://localhost:3000\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/font_check.png\" --window-size=1280,800 \"http://localhost:3000\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/reward --max-time 10)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --screenshot=\"C:/Users/Hp/AppData/Local/Temp/claude/d--assessment/e41a1d6a-0d8e-49f4-9519-235935113606/scratchpad/reward_check.png\" --window-size=1280,800 \"http://localhost:3000/reward\")",
+      "Bash(curl -s http://localhost:3000/reward --max-time 10 -o /tmp/reward_check.html -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:3000/reward --max-time 10 -o /dev/null -w \"%{http_code}\\\\n\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Hp\\AppData\\Local\\Temp\\claude\\d--assessment\\1648bd1b-fae5-464d-953a-9c7258ddcfcb\\scratchpad"
+    ]
+  }
+}

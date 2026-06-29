@@ -1,0 +1,457 @@
+.pixel {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ---------- click-to-start gate ---------- */
+/* Nothing in the scene animates until the user clicks; .is-playing releases it all at once. */
+
+.reward-scene:not(.is-playing) * {
+  animation-play-state: paused;
+}
+
+/* The purple jars idle-wobble to invite the click, then settle once the reward begins. */
+.reward-scene:not(.is-playing) .pot-idle {
+  animation-play-state: running;
+}
+
+.reward-scene.is-playing .pot-idle {
+  animation-play-state: paused;
+}
+
+.pot-idle {
+  animation: pot-wobble 3.2s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes pot-wobble {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+.pixel-corner {
+  --notch: 10px;
+  clip-path: polygon(
+    var(--notch) 0,
+    calc(100% - var(--notch)) 0,
+    calc(100% - var(--notch)) var(--notch),
+    100% var(--notch),
+    100% calc(100% - var(--notch)),
+    calc(100% - var(--notch)) calc(100% - var(--notch)),
+    calc(100% - var(--notch)) 100%,
+    var(--notch) 100%,
+    var(--notch) calc(100% - var(--notch)),
+    0 calc(100% - var(--notch)),
+    0 var(--notch),
+    var(--notch) var(--notch)
+  );
+}
+
+/* ---------- starfield ---------- */
+
+.pixel-dot {
+  position: absolute;
+}
+
+/* blocky cross — only right angles, no diagonals, so it stays crisp at any size */
+.pixel-cross {
+  position: absolute;
+  opacity: 0.7;
+  clip-path: polygon(
+    40% 0%,
+    60% 0%,
+    60% 40%,
+    100% 40%,
+    100% 60%,
+    60% 60%,
+    60% 100%,
+    40% 100%,
+    40% 60%,
+    0% 60%,
+    0% 40%,
+    40% 40%
+  );
+}
+
+/* blocky 4-point sparkle — same staircase-only rule as the cross, just taller */
+.pixel-spark {
+  position: absolute;
+  clip-path: polygon(
+    37.5% 0%,
+    62.5% 0%,
+    62.5% 25%,
+    75% 25%,
+    75% 37.5%,
+    100% 37.5%,
+    100% 62.5%,
+    75% 62.5%,
+    75% 75%,
+    62.5% 75%,
+    62.5% 100%,
+    37.5% 100%,
+    37.5% 75%,
+    25% 75%,
+    25% 62.5%,
+    0% 62.5%,
+    0% 37.5%,
+    25% 37.5%,
+    25% 25%,
+    37.5% 25%
+  );
+}
+
+.twinkle-pixel {
+  animation: twinkle-pixel 2.2s steps(3) infinite;
+}
+
+@keyframes twinkle-pixel {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- random space debris ---------- */
+
+.random-decor {
+  position: absolute;
+  opacity: 0.8;
+  filter: brightness(0.85);
+}
+
+/* ---------- static noise ---------- */
+
+.static-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 10;
+  mix-blend-mode: overlay;
+  image-rendering: pixelated;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 90px 90px;
+  animation: static-flicker 1s steps(10) infinite;
+}
+
+@keyframes static-flicker {
+  0% {
+    background-position: 0 0;
+  }
+  10% {
+    background-position: -37px 19px;
+  }
+  20% {
+    background-position: 21px -53px;
+  }
+  30% {
+    background-position: -61px -11px;
+  }
+  40% {
+    background-position: 14px 47px;
+  }
+  50% {
+    background-position: -29px 6px;
+  }
+  60% {
+    background-position: 53px -27px;
+  }
+  70% {
+    background-position: -8px -41px;
+  }
+  80% {
+    background-position: 36px 22px;
+  }
+  90% {
+    background-position: -44px -9px;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* ---------- badge ---------- */
+
+.badge-glow {
+  position: absolute;
+  inset: -55%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 226, 150, 0.95) 0%,
+    rgba(255, 188, 60, 0.45) 45%,
+    rgba(255, 188, 60, 0) 72%
+  );
+  filter: blur(3px);
+  opacity: 0;
+  animation:
+    badge-glow-build ease-out forwards,
+    badge-glow-idle ease-in-out infinite;
+  /* animation-delay and the build duration are set inline from RewardScene's timeline */
+}
+
+@keyframes badge-glow-build {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+}
+
+@keyframes badge-glow-idle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.1);
+  }
+}
+
+.badge-text {
+  font-family: var(--font-pixel), monospace;
+  color: #fff7e0;
+  -webkit-text-stroke: 2px #2a1458;
+  paint-order: stroke fill;
+  text-shadow:
+    2px 2px 0 #2a1458,
+    -2px 2px 0 #2a1458,
+    2px -2px 0 #2a1458,
+    -2px -2px 0 #2a1458;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* ---------- golden pulse blast ---------- */
+
+/* jagged 12-point pixel-burst — hard color bands instead of a soft gaussian circle */
+.pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10vmin;
+  height: 10vmin;
+  margin: -5vmin 0 0 -5vmin;
+  mix-blend-mode: screen;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    #fff8e0 0%,
+    #fff8e0 30%,
+    #ffd966 31%,
+    #ffd966 55%,
+    #ff9f2e 56%,
+    #ff9f2e 75%,
+    transparent 76%
+  );
+  clip-path: polygon(
+    50% 0%,
+    58% 18%,
+    72% 8%,
+    74% 26%,
+    92% 22%,
+    84% 38%,
+    100% 50%,
+    84% 62%,
+    92% 78%,
+    74% 74%,
+    72% 92%,
+    58% 82%,
+    50% 100%,
+    42% 82%,
+    28% 92%,
+    26% 74%,
+    8% 78%,
+    16% 62%,
+    0% 50%,
+    16% 38%,
+    8% 22%,
+    26% 26%,
+    28% 8%,
+    42% 18%
+  );
+  animation: pulse-expand cubic-bezier(0.22, 0.7, 0.3, 1) forwards;
+  /* animation-delay and -duration are set inline from RewardScene's timeline */
+}
+
+@keyframes pulse-expand {
+  0% {
+    transform: scale(0.3) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(34) rotate(18deg);
+    opacity: 0;
+  }
+}
+
+/* quick blocky white flash at the moment of impact */
+.blast-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16vmin;
+  height: 16vmin;
+  margin: -8vmin 0 0 -8vmin;
+  background: #fffceb;
+  mix-blend-mode: screen;
+  opacity: 0;
+  clip-path: polygon(
+    50% 0%,
+    60% 40%,
+    100% 50%,
+    60% 60%,
+    50% 100%,
+    40% 60%,
+    0% 50%,
+    40% 40%
+  );
+  animation: blast-flash 0.32s ease-out forwards;
+}
+
+@keyframes blast-flash {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+/* small pixel debris flying straight out from the badge in 8 directions */
+.blast-shrapnel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.65vmin;
+  height: 0.65vmin;
+  background: #ffe9a8;
+  box-shadow: 0 0 0.37vmin 0.09vmin rgba(255, 210, 90, 0.8);
+  opacity: 0;
+  animation: shrapnel-fly 0.6s ease-out forwards;
+}
+
+@keyframes shrapnel-fly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--ang)) translateX(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--ang)) translateX(24vmin);
+  }
+}
+
+/* ---------- pots ---------- */
+
+.pot-wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.pot-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pot-gold {
+  opacity: 0;
+  animation: pot-convert 0.55s ease-out forwards;
+  animation-delay: var(--pot-delay, 0s);
+}
+
+@keyframes pot-convert {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(255, 210, 90, 0)) brightness(1);
+  }
+  5% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 230, 150, 1)) brightness(1.7);
+  }
+  45% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(255, 210, 90, 0.6)) brightness(1.1);
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgba(255, 210, 90, 0.35)) brightness(1);
+  }
+}
+
+.pot-sparkle {
+  position: absolute;
+  width: 0.56vmin;
+  height: 0.56vmin;
+  background: #fff6d8;
+  box-shadow: 0 0 0.46vmin 0.09vmin rgba(255, 214, 110, 0.9);
+  opacity: 0;
+  clip-path: polygon(
+    37.5% 0%,
+    62.5% 0%,
+    62.5% 25%,
+    75% 25%,
+    75% 37.5%,
+    100% 37.5%,
+    100% 62.5%,
+    75% 62.5%,
+    75% 75%,
+    62.5% 75%,
+    62.5% 100%,
+    37.5% 100%,
+    37.5% 75%,
+    25% 75%,
+    25% 62.5%,
+    0% 62.5%,
+    0% 37.5%,
+    25% 37.5%,
+    25% 25%,
+    37.5% 25%
+  );
+  animation: sparkle-pop 0.7s ease-out forwards;
+  animation-delay: var(--pot-delay, 0s);
+}
+
+@keyframes sparkle-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
