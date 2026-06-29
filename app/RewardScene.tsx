@@ -45,6 +45,8 @@ type RandomImg = {
   baseWidth: number;
 };
 
+type Decor = RandomImg & { key: string; x: number; y: number; rotation: number };
+
 const RANDOM_IMAGES: RandomImg[] = [
   { n: 1, vbW: 267, vbH: 294, baseWidth: 146 },
   { n: 2, vbW: 214, vbH: 134, baseWidth: 158 },
@@ -89,10 +91,7 @@ function checkOverlap(
   return false;
 }
 
-function generateLayout(): {
-  pots: Pot[];
-  decors: (RandomImg & { x: number; y: number; rotation: number })[];
-} {
+function generateLayout(): { pots: Pot[]; decors: Decor[] } {
   const placed: PlacedElement[] = [
     // Center badge clearance zone (badge is at 50, 50)
     { x: 50, y: 50, rx: 18, ry: 14 }
@@ -318,7 +317,7 @@ function BlastEffect() {
   );
 }
 
-function RandomDecor({ decors }: { decors: (RandomImg & { x: number; y: number; rotation: number; key: string })[] }) {
+function RandomDecor({ decors }: { decors: Decor[] }) {
   return (
     <>
       {decors.map((img) => (
@@ -383,15 +382,15 @@ function PotInstance({ pot }: { pot: Pot }) {
 
 export default function RewardScene() {
   const [started, setStarted] = useState(false);
-  const [layout, setLayout] = useState<{
-    pots: Pot[];
-    decors: (RandomImg & { x: number; y: number; rotation: number })[];
-  } | null>(null);
+  const [layout, setLayout] = useState<{ pots: Pot[]; decors: Decor[] } | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setLayout(generateLayout());
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    requestAnimationFrame(() => {
+      setLayout(generateLayout());
+    });
   }, []);
 
   if (!mounted || !layout) {
