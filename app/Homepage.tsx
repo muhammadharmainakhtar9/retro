@@ -78,7 +78,7 @@ function Nav() {
 export default function Homepage() {
   return (
     <div className="relative h-screen w-screen select-none overflow-hidden bg-linear-to-b from-[#11143D] to-[#07081F]">
-      <div className="pointer-events-none absolute inset-0">
+        <div className="pointer-events-none absolute inset-0">
         <GridScan
           sensitivity={0.12}
           lineThickness={0.3}
